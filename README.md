@@ -5,7 +5,7 @@ Task:1. Database Design:
    CREATE DATABASE TechShop
 
 USE TechShop
-`
+```
 2. Define the schema for the Customers, Products, Orders, OrderDetails and Inventory tables based on the provided schema.
 
 
