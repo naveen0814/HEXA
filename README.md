@@ -118,8 +118,7 @@ e. Inventory
 ![{0D1E4AFF-75EF-4DA4-A8C5-883C163DD819}](https://github.com/user-attachments/assets/11c420a8-73c0-4926-9674-f2033e21e15f)
 ![{C3C2C495-4A59-4549-85C1-1035B16447AF}](https://github.com/user-attachments/assets/5e8c3c0e-87a6-4be3-a7c9-20be6bce3218)
 
-
-#Tasks 2: Select, Where, Between, AND, LIKE:
+# Tasks 2: Select, Where, Between, AND, LIKE:
 1. Write an SQL query to retrieve the names and emails of all customers.
    ```sql
    select FirstName,LastName,Email from Customers
