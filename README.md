@@ -125,9 +125,258 @@ e. Inventory
    ```
 ![Screenshot_20250317_205945](https://github.com/user-attachments/assets/036dbf4c-ab5b-4ee6-bc46-ff24305b2a6d)
 
+2. Write an SQL query to list all orders with their order dates and corresponding customer names.
    
+```sql
+SELECT 
+    Orders.OrderID,
+    Orders.OrderDate,
+    Customers.FirstName,
+    Customers.LastName
+FROM 
+    Orders
+INNER JOIN 
+    Customers
+ON 
+    Orders.CustomerID = Customers.CustomerID
+```
+![{93BB38FB-BB4B-45E0-A6AB-D5F14287B983}](https://github.com/user-attachments/assets/e2499950-ef22-410d-a990-6498d5f96120)
+3. Write an SQL query to insert a new customer record into the "Customers" table. Include customer information such as name, email, and address.
+``sql
+INSERT into Customers (CustomerID, FirstName, LastName, Email, Phone, Address) 
+VALUES
+(11,'Karthik','Raj','Karthikraj0808@example.com',8798767987,'No.234 Velan Nagar Valasarvakkam Chennai')
+```
+![{25A8AEA2-0128-4D30-A081-9DD5A2B402DC}](https://github.com/user-attachments/assets/d35194d3-b918-47aa-9625-32f1f32982e9)
+
+
+4. Write an SQL query to update the prices of all electronic gadgets in the "Products" table by increasing them by 10%.
+ 
+```sql
+UPDATE Products
+SET Price = Price*1.10
+select * from Products```
+![{91FD4E73-5A3B-4C19-84FE-C56719604E41}](https://github.com/user-attachments/assets/babc5892-def2-4a90-b337-c99de5c135b4)
+
+5. Write an SQL query to retrieve a list of electronic gadgets along with their corresponding 
+categories.
+
+```sql
+DECLARE @OrderID INT = 3;
+DELETE FROM OrderDetails WHERE OrderID = @OrderID
+DELETE FROM Orders WHERE OrderID = @OrderID
+
+```
+![Screenshot_20250317_214219](https://github.com/user-attachments/assets/1ab04e46-e00d-421f-a5c3-b920629b7232)
+
+6. Write an SQL query to insert a new order into the "Orders" table. Include the customer ID, 
+order date, and any other necessary information.
+```sql
+INSERT INTO Orders (OrderID, CustomerID, OrderDate, TotalAmount)
+VALUES (11, 2, '2025-03-17', 15999.00)
+```
+![{BC8AF78E-143A-4A5D-9872-82D38F10F1B4}](https://github.com/user-attachments/assets/e77ba029-9b0f-486e-a4e5-369daa1001ab)
+7. Write an SQL query to update the contact information (e.g., email and address) of a specific 
+customer in the "Customers" table. Allow users to input the customer ID and new contact 
+information.
+```sql
+UPDATE Customers SET Email='naveen2004@example.com', Address = 'Velan Nagar Valasaravakkam' WHERE CustomerID = 1
+```
+![{DD9DC58D-697C-4CA8-92DE-3043966B4276}](https://github.com/user-attachments/assets/7e16185c-d97e-47f0-84f5-deff4251b47b)
+
+8. Write an SQL query to recalculate and update the total cost of each order in the "Orders" 
+table based on the prices and quantities in the "OrderDetails" table. 
+
+
+```sql
+
+UPDATE Orders
+SET TotalAmount = (
+    SELECT SUM(p.Price * od.Quantity)
+    FROM OrderDetails od
+    INNER JOIN Products p ON od.ProductID = p.ProductID
+    WHERE od.OrderID = Orders.OrderID
+)
+
+```
+![{63FB8872-C081-44B6-88F9-0E6E1C1B0A19}](https://github.com/user-attachments/assets/71d754f1-a5cc-49eb-9fce-400776773a24)
+
+
+9. Write an SQL query to delete all orders and their associated order details for a specific 
+customer from the "Orders" and "OrderDetails" tables. Allow users to input the customer ID 
+as a parameter.
+
+```sql
+DECLARE @CustID INT = 2;
+DELETE FROM OrderDetails
+WHERE OrderID IN (SELECT OrderID FROM Orders WHERE CustomerID = @CustID);
+DELETE FROM Orders
+WHERE CustomerID = @CustID;
+```
+![{3A7B3C41-7725-492D-8D76-CF5205C62DCD}](https://github.com/user-attachments/assets/d638817c-9454-4a15-a707-45cd64df4359)
+
+10. Write an SQL query to insert a new electronic gadget product into the "Products" table, 
+including product name, category, price, and any other relevant details. 
+
+```sql
+INSERT INTO Products (ProductID, ProductName, Description, Price)
+VALUES (11, 'OnePlus Nord 3', 'OnePlus Smartphone 128GB', 29999.00)
+```
+
+![{DEF691A4-464C-4999-84A6-8ED2B2BC1CF7}](https://github.com/user-attachments/assets/6140925f-a08c-4810-98cb-ed925a2b7227)
+
+11.Write an SQL query to update the status of a specific order in the "Orders" table (e.g., from 
+"Pending" to "Shipped"). Allow users to input the order ID and the new status.
+```sql
+ALTER table Orders add Status Varchar(50)
+update Orders SET Status = 'Shipped' Where OrderID=1
+```
+
+![{E14D3CCA-733A-4606-BEE1-C15F53B2072C}](https://github.com/user-attachments/assets/068b00a4-8856-4fc3-be6d-92570b65e273)
+
+12. Write an SQL query to calculate and update the number of orders placed by each customer 
+in the "Customers" table based on the data in the "Orders" table.
+```sql
+ALTER TABLE Customers ADD OrderCount INT;
+UPDATE Customers
+SET OrderCount = (
+    SELECT COUNT(*) FROM Orders WHERE Orders.CustomerID = Customers.CustomerID
+)
+```
+![{B30C4765-70ED-4851-8F7D-FC489EE733A4}](https://github.com/user-attachments/assets/a14d3b01-d19f-4330-a8ef-7aeddf43054a)
+
+
+# Task 3. Aggregate functions, Having, Order By, GroupBy and Joins:  
+
+1. Write an SQL query to retrieve a list of all orders along with customer information (e.g., 
+customer name) for each order.
+
+```sql
+
+SELECT Orders.OrderID, Orders.OrderDate, Customers.FirstName, Customers.LastName
+FROM Orders
+INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID;
+
+```
+
+![{B1D05698-6FF2-4EA5-9C88-FEEC7E698B21}](https://github.com/user-attachments/assets/9bead468-b832-40dd-804a-a00043ba32a7)
+
+2. Write an SQL query to find the total revenue generated by each electronic gadget product. 
+Include the product name and the total revenue.
+
+```sql
+SELECT Products.ProductName, SUM(OrderDetails.Quantity * Products.Price) AS TotalRevenue
+FROM OrderDetails
+INNER JOIN Products ON OrderDetails.ProductID = Products.ProductID
+GROUP BY Products.ProductName
+```
+
+![{8360D8C8-4158-4A7F-BED9-ADD4F90841FF}](https://github.com/user-attachments/assets/15a0283c-257b-4a61-9857-0efba9f73ae5)
+
+3. Write an SQL query to list all customers who have made at least one purchase. Include their 
+names and contact information.
+```sql
+SELECT DISTINCT Customers.CustomerID, Customers.FirstName, Customers.LastName, Customers.Email, Customers.Phone
+FROM Customers
+INNER JOIN Orders ON Customers.CustomerID = Orders.CustomerID;
+```
+
+![{3268EE77-A79D-48A4-9146-2CDC6B1861BD}](https://github.com/user-attachments/assets/d934ccdd-3f2f-48ba-8056-8b8f4fec166f)
+
+4. Write an SQL query to find the most popular electronic gadget, which is the one with the highest 
+total quantity ordered. Include the product name and the total quantity ordered.
+
+```sql
+SELECT TOP 1 Products.ProductName, SUM(OrderDetails.Quantity) AS TotalQuantity
+FROM OrderDetails
+INNER JOIN Products ON OrderDetails.ProductID = Products.ProductID
+GROUP BY Products.ProductName
+ORDER BY TotalQuantity DESC
+```
+
+
+![{A980301F-A3EC-4948-B086-77BC74086D9E}](https://github.com/user-attachments/assets/e491cdc6-5376-4029-b6fa-cab79c8ea875)
+
+5. Write an SQL query to retrieve a list of electronic gadgets along with their corresponding 
+categories.
+
+```sql
+SELECT ProductName, Description
+FROM Products
+```
+
+
+![{4A5DE529-6645-4107-808B-86CEC29FAA82}](https://github.com/user-attachments/assets/8fd43a2e-4c28-4b8b-b0eb-e67e891d7399)
+
+6. Write an SQL query to calculate the average order value for each customer. Include the 
+customer's name and their average order value
+
+```sql
+SELECT Customers.CustomerID, Customers.FirstName, Customers.LastName, AVG(Orders.TotalAmount) AS AverageOrderValue
+FROM Orders
+INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID
+GROUP BY Customers.CustomerID, Customers.FirstName, Customers.LastName
+```
+
+
+![{30DA6DCA-18B2-4534-B871-53F988DAD34B}](https://github.com/user-attachments/assets/a450ac13-10bc-44a6-8698-5289de5712e2)
+
+7. Write an SQL query to find the order with the highest total revenue. Include the order ID, 
+customer information, and the total revenue.
+
+```sql
+SELECT TOP 1 Orders.OrderID, Customers.FirstName, Customers.LastName, Orders.TotalAmount
+FROM Orders
+INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID
+ORDER BY Orders.TotalAmount DESC
+```
 
 
 
+![{93000681-F432-4703-BCF0-FF75B0BBD3BE}](https://github.com/user-attachments/assets/9388284b-5464-4044-b02a-8accfb635670)
+
+8. Write an SQL query to list electronic gadgets and the number of times each product has been 
+ordered.
+
+```sql
+
+SELECT Products.ProductName, COUNT(OrderDetails.OrderDetailID) AS TimesOrdered
+FROM OrderDetails
+INNER JOIN Products ON OrderDetails.ProductID = Products.ProductID
+GROUP BY Products.ProductName
+```
+
+![{60DCFADF-374C-4E7C-BFB1-127926A27C76}](https://github.com/user-attachments/assets/ae78a198-0342-4ea5-8d51-a1c007b66d1b)
+
+9. Write an SQL query to find customers who have purchased a specific electronic gadget product. 
+Allow users to input the product name as a parameter.
+
+```sql
+DECLARE @ProductName VARCHAR(100) = 'iPhone 14'
+
+SELECT DISTINCT Customers.CustomerID, Customers.FirstName, Customers.LastName
+FROM Customers
+INNER JOIN Orders ON Customers.CustomerID = Orders.CustomerID
+INNER JOIN OrderDetails ON Orders.OrderID = OrderDetails.OrderID
+INNER JOIN Products ON OrderDetails.ProductID = Products.ProductID
+WHERE Products.ProductName = @ProductName
+```
 
 
+![{1AFFBB38-8D16-45DA-81A5-127F73D957C3}](https://github.com/user-attachments/assets/f02e0f1a-5b2b-42b0-a982-518d913d41d5)
+
+10. Write an SQL query to calculate the total revenue generated by all orders placed within a 
+specific time period. Allow users to input the start and end dates as parameters.
+
+```sql
+DECLARE @StartDate DATE = '2024-12-01';
+DECLARE @EndDate DATE = '2024-12-31';
+
+SELECT SUM(TotalAmount) AS TotalRevenue
+FROM Orders
+WHERE OrderDate BETWEEN @StartDate AND @EndDate
+```
+
+
+
+![{797A66FF-8051-463B-8804-2A21AA902198}](https://github.com/user-attachments/assets/2f7b513c-3dfa-4c87-92e9-ad7a6c55baaf)
