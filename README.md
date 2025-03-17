@@ -111,3 +111,16 @@ c. Orders
 d. OrderDetails
 e. Inventory
 
+![{64AA4EDD-4BB2-4AAD-ACC1-29EF2900EA94}](https://github.com/user-attachments/assets/514ccb72-9100-471b-a283-9951bc33b14a)
+![{221C37F6-17AB-43FF-A8E0-CBEFC1EA32D3}](https://github.com/user-attachments/assets/f4e62aa1-f655-4fff-94b2-a67cdf5ead09)
+![{F8AC3B9D-ABCA-416F-859B-BB776ACF03EC}](https://github.com/user-attachments/assets/8038b3e0-e402-478b-8530-df728a19c43a)
+![{0D1E4AFF-75EF-4DA4-A8C5-883C163DD819}](https://github.com/user-attachments/assets/11c420a8-73c0-4926-9674-f2033e21e15f)
+![{C3C2C495-4A59-4549-85C1-1035B16447AF}](https://github.com/user-attachments/assets/5e8c3c0e-87a6-4be3-a7c9-20be6bce3218)
+
+
+
+
+
+
+
+
