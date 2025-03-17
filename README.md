@@ -1,6 +1,7 @@
 # HEXA
 Task:1. Database Design:
 1. Create the database named "TechShop"
+```sql
    CREATE DATABASE TechShop
 
 USE TechShop
