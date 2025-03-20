@@ -143,7 +143,7 @@ ON
 ```
 ![{93BB38FB-BB4B-45E0-A6AB-D5F14287B983}](https://github.com/user-attachments/assets/e2499950-ef22-410d-a990-6498d5f96120)
 3. Write an SQL query to insert a new customer record into the "Customers" table. Include customer information such as name, email, and address.
-``sql
+```sql
 INSERT into Customers (CustomerID, FirstName, LastName, Email, Phone, Address) 
 VALUES
 (11,'Karthik','Raj','Karthikraj0808@example.com',8798767987,'No.234 Velan Nagar Valasarvakkam Chennai')
