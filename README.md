@@ -156,7 +156,8 @@ VALUES
 ```sql
 UPDATE Products
 SET Price = Price*1.10
-select * from Products```
+select * from Products
+```
 ![{91FD4E73-5A3B-4C19-84FE-C56719604E41}](https://github.com/user-attachments/assets/babc5892-def2-4a90-b337-c99de5c135b4)
 
 5. Write an SQL query to retrieve a list of electronic gadgets along with their corresponding 
