@@ -167,3 +167,44 @@ VALUES
 (10, 700.00, '2024-02-19')
 
 ```
+# Tasks 2: Select, Where, Between, AND, LIKE:   
+
+1. Write an SQL query to insert a new student into the "Students" table with the following details: 
+a. First Name: John
+b. Last Name: Doe 
+c. Date of Birth: 1995-08-15 
+d. Email: john.doe@example.com 
+e. Phone Number: 1234567890 
+2. Write an SQL query to enroll a student in a course. Choose an existing student and course and 
+insert a record into the "Enrollments" table with the enrollment date. 
+3. Update the email address of a specific teacher in the "Teacher" table. Choose any teacher and 
+modify their email address. 
+4. Write an SQL query to delete a specific enrollment record from the "Enrollments" table. Select 
+an enrollment record based on the student and course. 
+5. Update the "Courses" table to assign a specific teacher to a course. Choose any course and 
+teacher from the respective tables. 
+6. Delete a specific student from the "Students" table and remove all their enrollment records 
+from the "Enrollments" table. Be sure to maintain referential integrity. 
+7. Update the payment amount for a specific payment record in the "Payments" table. Choose any 
+payment record and modify the payment amount. 
+Task 3. Aggregate functions, Having, Order By, GroupBy and Joins:  
+1. Write an SQL query to calculate the total payments made by a specific student. You will need to 
+join the "Payments" table with the "Students" table based on the student's ID. 
+2. Write an SQL query to retrieve a list of courses along with the count of students enrolled in each 
+course. Use a JOIN operation between the "Courses" table and the "Enrollments" table. 
+3. Write an SQL query to find the names of students who have not enrolled in any course. Use a 
+LEFT JOIN between the "Students" table and the "Enrollments" table to identify students 
+without enrollments. 
+4. Write an SQL query to retrieve the first name, last name of students, and the names of the 
+courses they are enrolled in. Use JOIN operations between the "Students" table and the 
+"Enrollments" and "Courses" tables. 
+5. Create a query to list the names of teachers and the courses they are assigned to. Join the 
+"Teacher" table with the "Courses" table. 
+6. Retrieve a list of students and their enrollment dates for a specific course. You'll need to join the 
+"Students" table with the "Enrollments" and "Courses" tables. 
+7. Find the names of students who have not made any payments. Use a LEFT JOIN between the 
+"Students" table and the "Payments" table and filter for students with NULL payment records. 
+8. Write a query to identify courses that have no enrollments. You'll need to use a LEFT JOIN 
+between the "Courses" table and the "Enrollments" table and filter for courses with NULL 
+enrollment records.
+
