@@ -536,7 +536,7 @@ WHERE
     (SELECT COUNT(course_id) FROM Courses)
 
 ```
-![{FAE9EBF8-E79F-48A8-812A-7EF833B89AE6}](https://github.com/user-attachments/assets/aa0426d7-277f-4f73-9ad2-64e4cc64cf94)
+![{14A18960-F16A-4B0E-9699-E8EF34DF8ABC}](https://github.com/user-attachments/assets/f7560d51-c29b-4df0-ada8-e373d6d0a24a)
 
 
 6. Retrieve the names of teachers who have not been assigned to any courses. Use subqueries to 
@@ -553,24 +553,37 @@ WHERE
     teacher_id NOT IN (SELECT DISTINCT teacher_id FROM Courses WHERE teacher_id IS NOT NULL)
 
 ```
+![{B6AB5EE3-8AA1-42FE-80DC-A7956639D653}](https://github.com/user-attachments/assets/8ec49c7a-5368-4f7a-8224-8912f270d1a1)
+
 
 
 7. Calculate the average age of all students. Use subqueries to calculate the age of each student 
 based on their date of birth. 
 
 ```sql
-
+SELECT 
+    AVG(DATEDIFF(YEAR, date_of_birth, GETDATE())) AS average_age
+FROM 
+    Students
 
 ```
 
+![{B64047B0-86F7-4BBB-9332-349AEB32C3A6}](https://github.com/user-attachments/assets/0e3ee95a-90e2-48a9-8e96-c0b90486a7c7)
 
 8. Identify courses with no enrollments. Use subqueries to find courses without enrollment 
 records. 
 
 ```sql
 
+SELECT 
+    course_name
+FROM 
+    Courses
+WHERE 
+    course_id NOT IN (SELECT DISTINCT course_id FROM Enrollments)
 
 ```
+![{14D69B15-F8F5-4B51-9270-8A7E1845B5E8}](https://github.com/user-attachments/assets/e0c5c682-de37-45c2-b972-ee6bd06619e5)
 
 
 9. Calculate the total payments made by each student for each course they are enrolled in. Use 
@@ -578,17 +591,43 @@ subqueries and aggregate functions to sum payments.
 
 ```sql
 
+SELECT 
+    S.first_name, 
+    S.last_name, 
+    C.course_name, 
+    (SELECT SUM(P.amount) 
+     FROM Payments P 
+     WHERE P.student_id = S.student_id) AS total_payment
+FROM 
+    Students S
+JOIN 
+    Enrollments E ON S.student_id = E.student_id
+JOIN 
+    Courses C ON E.course_id = C.course_id
 
 ```
+![{6F433F8E-DEE0-4396-8A6F-88328BB7B0A2}](https://github.com/user-attachments/assets/c5c61b4c-6e31-41ad-9fd4-754881015c27)
 
 
 10. Identify students who have made more than one payment. Use subqueries and aggregate 
 functions to count payments per student and filter for those with counts greater than one. 
 
 ```sql
-
+SELECT 
+    S.first_name, 
+    S.last_name, 
+    COUNT(P.payment_id) AS payment_count
+FROM 
+    Students S
+JOIN 
+    Payments P ON S.student_id = P.student_id
+GROUP BY 
+    S.first_name, S.last_name
+HAVING 
+    COUNT(P.payment_id) > 1
 
 ```
+![{FFC65068-EB47-4E78-BFDC-698297E09968}](https://github.com/user-attachments/assets/08ba90b2-72f8-4c4b-9a66-29cf6f387d28)
 
 
 11. Write an SQL query to calculate the total payments made by each student. Join the "Students" 
@@ -597,8 +636,19 @@ student.
 
 ```sql
 
+SELECT 
+    S.first_name, 
+    S.last_name, 
+    SUM(P.amount) AS total_payment
+FROM 
+    Students S
+LEFT JOIN 
+    Payments P ON S.student_id = P.student_id
+GROUP BY 
+    S.first_name, S.last_name
 
 ```
+![{A3B0662A-0EAA-415C-A735-9F6214201810}](https://github.com/user-attachments/assets/d69d60c8-681e-43b8-8547-bd53b66e4add)
 
 
 12. Retrieve a list of course names along with the count of students enrolled in each course. Use 
@@ -607,8 +657,18 @@ count enrollments.
 
 ```sql
 
+SELECT 
+    C.course_name, 
+    COUNT(E.student_id) AS enrolled_students
+FROM 
+    Courses C
+LEFT JOIN 
+    Enrollments E ON C.course_id = E.course_id
+GROUP BY 
+    C.course_name
 
 ```
+![{D710E05C-333F-4FCE-A780-1CEE1DE24510}](https://github.com/user-attachments/assets/000f0cf4-826d-4e2c-b565-a6b9ed54ec53)
 
 
 13. Calculate the average payment amount made by students. Use JOIN operations between the 
@@ -617,6 +677,22 @@ count enrollments.
 ```sql
 
 
+SELECT 
+    C.course_name, 
+    COUNT(E.student_id) AS enrolled_students
+FROM 
+    Courses C
+LEFT JOIN 
+    Enrollments E ON C.course_id = E.course_id
+GROUP BY 
+    C.course_name
+
+SELECT 
+    AVG(P.amount) AS avg_payment
+FROM 
+    Payments P
+
 ```
+![{1C55CA85-C19E-4C97-B65F-B32D51858D0D}](https://github.com/user-attachments/assets/e80f64b1-b2a1-44e0-8dc2-d9b4ddc255d3)
 
 
