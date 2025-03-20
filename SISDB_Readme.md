@@ -175,36 +175,448 @@ b. Last Name: Doe
 c. Date of Birth: 1995-08-15 
 d. Email: john.doe@example.com 
 e. Phone Number: 1234567890 
+
+```sql
+
+INSERT INTO Students (first_name, last_name, date_of_birth, email, phone_number)
+VALUES ('John', 'Doe', '1995-08-15', 'john.doe@example.com', '1234567890')
+
+```
+![{D3EC4FD5-B87B-4856-86B2-05011E954A6F}](https://github.com/user-attachments/assets/99b64dfa-312d-49cf-9796-f41048d23b56)
+
 2. Write an SQL query to enroll a student in a course. Choose an existing student and course and 
 insert a record into the "Enrollments" table with the enrollment date. 
+```sql
+INSERT INTO Enrollments (student_id, course_id, enrollment_date)
+VALUES (11, 1, GETDATE())
+
+```
+![{5E2389AA-D0C3-43F3-A7B0-DEA2C531D8D4}](https://github.com/user-attachments/assets/611f81ed-4dbe-4801-b06f-f8baae289b1a)
+
+
 3. Update the email address of a specific teacher in the "Teacher" table. Choose any teacher and 
 modify their email address. 
+
+```sql
+update teacher
+set email='ramesh@example.com'
+where teacher_id=1
+
+
+```
+![{5B8E3276-7324-4E9E-AAA6-31291BE63BC5}](https://github.com/user-attachments/assets/5596ef2d-37d6-4dfe-80f1-65c318448247)
+
 4. Write an SQL query to delete a specific enrollment record from the "Enrollments" table. Select 
 an enrollment record based on the student and course. 
+
+
+```sql
+DELETE FROM Enrollments
+WHERE student_id = 2 AND course_id = 3
+
+```
+![{A87071B1-E8FE-4F68-A9FD-D90CD3B88063}](https://github.com/user-attachments/assets/596b3be0-5e0a-4488-9496-a7556b686e65)
+
 5. Update the "Courses" table to assign a specific teacher to a course. Choose any course and 
 teacher from the respective tables. 
+
+
+```sql
+UPDATE Courses
+SET teacher_id = 4
+WHERE course_id = 4
+
+```
+![{3F05D270-69F6-43E2-B708-6CF9DDC59DEA}](https://github.com/user-attachments/assets/47a5b96f-0609-4b7e-b82b-85262831fe52)
+
 6. Delete a specific student from the "Students" table and remove all their enrollment records 
 from the "Enrollments" table. Be sure to maintain referential integrity. 
+
+
+```sql
+DELETE FROM Students
+WHERE student_id = 5
+
+```
+![{C2D43656-BCE9-46CF-BE8E-2EDCDBFA2B79}](https://github.com/user-attachments/assets/e1c05d0d-5051-4a9d-ba7c-0b6a8a774fec)
+
 7. Update the payment amount for a specific payment record in the "Payments" table. Choose any 
 payment record and modify the payment amount. 
-Task 3. Aggregate functions, Having, Order By, GroupBy and Joins:  
+```sql
+update Payments
+set amount=600
+where payment_id=1
+
+```
+![{20DDF630-9A84-4F38-9B44-12DF3790293F}](https://github.com/user-attachments/assets/84e74677-9131-4e67-9256-2cf2713fb87f)
+
+# Task 3. Aggregate functions, Having, Order By, GroupBy and Joins:  
+
+
 1. Write an SQL query to calculate the total payments made by a specific student. You will need to 
 join the "Payments" table with the "Students" table based on the student's ID. 
+
+
+```sql
+SELECT 
+    S.first_name, 
+    S.last_name, 
+    SUM(P.amount) AS total_payment
+FROM 
+    Students S
+JOIN 
+    Payments P ON S.student_id = P.student_id
+WHERE 
+    S.student_id = 1
+GROUP BY 
+    S.first_name, S.last_name
+
+```
+![{AB6AB538-264F-45C4-A3F2-F324DF56FE1F}](https://github.com/user-attachments/assets/7e25ce41-bc36-42ce-8641-8ace7d5805d1)
+
 2. Write an SQL query to retrieve a list of courses along with the count of students enrolled in each 
 course. Use a JOIN operation between the "Courses" table and the "Enrollments" table. 
+
+```sql
+SELECT 
+    C.course_name, 
+    COUNT(E.student_id) AS enrolled_students
+FROM 
+    Courses C
+LEFT JOIN 
+    Enrollments E ON C.course_id = E.course_id
+GROUP BY 
+    C.course_name
+
+```
+![{765523C5-4258-4FD1-A068-3BADF4027333}](https://github.com/user-attachments/assets/84f76986-11d1-442b-8c95-64ee8f834965)
+
 3. Write an SQL query to find the names of students who have not enrolled in any course. Use a 
 LEFT JOIN between the "Students" table and the "Enrollments" table to identify students 
 without enrollments. 
+
+```sql
+
+SELECT 
+    S.first_name, 
+    S.last_name
+FROM 
+    Students S
+LEFT JOIN 
+    Enrollments E ON S.student_id = E.student_id
+WHERE 
+    E.enrollment_id IS NULL
+
+```
+![{85CB41F6-03F4-44AB-8AE6-5A849CCF8752}](https://github.com/user-attachments/assets/59a2d465-63ff-4f4c-96f2-036b90ff5b9c)
+
 4. Write an SQL query to retrieve the first name, last name of students, and the names of the 
 courses they are enrolled in. Use JOIN operations between the "Students" table and the 
 "Enrollments" and "Courses" tables. 
+
+```sql
+SELECT 
+    S.first_name, 
+    S.last_name, 
+    C.course_name
+FROM 
+    Students S
+JOIN 
+    Enrollments E ON S.student_id = E.student_id
+JOIN 
+    Courses C ON E.course_id = C.course_id
+
+```
+![{0F5A89FB-4F55-4440-A748-E0D0CA9D846E}](https://github.com/user-attachments/assets/6eb4db3d-8f6a-43ab-a31c-b683ff5d095e)
+
 5. Create a query to list the names of teachers and the courses they are assigned to. Join the 
 "Teacher" table with the "Courses" table. 
+
+```sql
+SELECT 
+    T.first_name, 
+    T.last_name, 
+    C.course_name
+FROM 
+    Teacher T
+JOIN 
+    Courses C ON T.teacher_id = C.teacher_id
+
+```
+![{B714FEB5-8F11-4F92-B200-86BD2C32A7B1}](https://github.com/user-attachments/assets/9127b6d9-2196-4420-80f3-835360be76ec)
+
 6. Retrieve a list of students and their enrollment dates for a specific course. You'll need to join the 
 "Students" table with the "Enrollments" and "Courses" tables. 
+
+```sql
+
+SELECT 
+    S.first_name, 
+    S.last_name, 
+    E.enrollment_date
+FROM 
+    Students S
+JOIN 
+    Enrollments E ON S.student_id = E.student_id
+WHERE 
+    E.course_id = 1
+
+```
+![{AA5AEC19-96FA-4501-954B-B669B6B139AC}](https://github.com/user-attachments/assets/86a121e6-6914-4984-b1c3-5af2f9651ed4)
+
 7. Find the names of students who have not made any payments. Use a LEFT JOIN between the 
 "Students" table and the "Payments" table and filter for students with NULL payment records. 
+
+```sql
+SELECT 
+    S.first_name, 
+    S.last_name
+FROM 
+    Students S
+LEFT JOIN 
+    Payments P ON S.student_id = P.student_id
+WHERE 
+    P.payment_id IS NULL
+
+```
+![{1B671143-A09C-45FF-A537-82B8B5B2DD34}](https://github.com/user-attachments/assets/5ad94089-b466-4ef9-8f92-83bbe0fb4c37)
+
 8. Write a query to identify courses that have no enrollments. You'll need to use a LEFT JOIN 
 between the "Courses" table and the "Enrollments" table and filter for courses with NULL 
 enrollment records.
+```sql
+SELECT 
+    C.course_name
+FROM 
+    Courses C
+LEFT JOIN 
+    Enrollments E ON C.course_id = E.course_id
+WHERE 
+    E.enrollment_id IS NULL
+```
+![{E4AD1CE0-CE5F-4D11-ACD6-C4E4591CAFA8}](https://github.com/user-attachments/assets/05714ef4-14ed-4ec3-9109-30379a4f36b2)
+
+9. Identify students who are enrolled in more than one course. Use a self-join on the "Enrollments" 
+table to find students with multiple enrollment records. 
+```sql
+
+SELECT 
+    S.first_name, 
+    S.last_name, 
+    COUNT(E.course_id) AS course_count
+FROM 
+    Students S
+JOIN 
+    Enrollments E ON S.student_id = E.student_id
+GROUP BY 
+    S.first_name, S.last_name
+HAVING 
+    COUNT(E.course_id) > 1
+```
+![{C164016F-0341-425B-9D6D-23561190BC14}](https://github.com/user-attachments/assets/d60db52c-ec5c-4b96-a0ca-4fc519d273a0)
+
+
+
+10. Find teachers who are not assigned to any courses. Use a LEFT JOIN between the "Teacher" 
+table and the "Courses" table and filter for teachers with NULL course assignments. 
+```sql
+SELECT 
+    T.first_name, 
+    T.last_name
+FROM 
+    Teacher T
+LEFT JOIN 
+    Courses C ON T.teacher_id = C.teacher_id
+WHERE 
+    C.course_id IS NULL
+```
+![{EF3E0424-820E-4D8B-A829-20021152F0D6}](https://github.com/user-attachments/assets/6aa9553c-3c7f-400e-985a-6a75bcac683d)
+
+# Task 4. Subquery and its type:  
+1. Write an SQL query to calculate the average number of students enrolled in each course. Use 
+aggregate functions and subqueries to achieve this.
+
+```sql
+SELECT 
+    AVG(student_count) AS avg_students_per_course
+FROM 
+    (SELECT 
+        course_id, 
+        COUNT(student_id) AS student_count
+     FROM 
+        Enrollments
+     GROUP BY 
+        course_id) AS CourseCounts
+
+```
+![{EA3A6CF7-A40A-4B8D-AAAB-D7117FFDCFCF}](https://github.com/user-attachments/assets/1af8981a-3057-42f6-9974-a7bc2b10e933)
+
+
+2. Identify the student(s) who made the highest payment. Use a subquery to find the maximum 
+payment amount and then retrieve the student(s) associated with that amount. 
+
+```sql
+	SELECT 
+		S.first_name, 
+		S.last_name, 
+		P.amount
+	FROM 
+		Payments P
+	JOIN 
+		Students S ON P.student_id = S.student_id
+	WHERE 
+		P.amount = (SELECT MAX(amount) FROM Payments)
+
+```
+![{BF61D914-2195-46C2-84C6-AE9042F81805}](https://github.com/user-attachments/assets/eff9696e-240c-4436-b548-89bd412ea748)
+
+
+3. Retrieve a list of courses with the highest number of enrollments. Use subqueries to find the 
+course(s) with the maximum enrollment count. 
+
+```sql
+
+SELECT 
+    C.course_name, 
+    COUNT(E.student_id) AS total_enrollments
+FROM 
+    Courses C
+JOIN 
+    Enrollments E ON C.course_id = E.course_id
+GROUP BY 
+    C.course_name
+HAVING 
+    COUNT(E.student_id) = 
+    (SELECT MAX(course_enrollments) 
+     FROM 
+        (SELECT COUNT(student_id) AS course_enrollments 
+         FROM Enrollments 
+         GROUP BY course_id) AS EnrollmentCounts)
+
+```
+![{DB7B3388-09AC-43BD-AF2F-67CD985312D4}](https://github.com/user-attachments/assets/2a257b89-a4d8-4f89-bfc6-26f7ade52796)
+
+
+4. Calculate the total payments made to courses taught by each teacher. Use subqueries to sum 
+payments for each teacher's courses. 
+
+```sql
+SELECT 
+    T.first_name, 
+    T.last_name, 
+    SUM(P.amount) AS total_payments
+FROM 
+    Teacher T
+JOIN 
+    Courses C ON T.teacher_id = C.teacher_id
+JOIN 
+    Enrollments E ON C.course_id = E.course_id
+JOIN 
+    Payments P ON E.student_id = P.student_id
+GROUP BY 
+    T.first_name, T.last_name
+
+```
+![{920F10A3-FB0E-473F-AED4-9041682EA5B4}](https://github.com/user-attachments/assets/aadd5db8-75e4-4278-aabc-d93008ed38ca)
+
+
+5. Identify students who are enrolled in all available courses. Use subqueries to compare a 
+student's enrollments with the total number of courses. 
+
+```sql
+
+SELECT 
+    S.first_name, 
+    S.last_name
+FROM 
+    Students S
+WHERE 
+    (SELECT COUNT(DISTINCT course_id) FROM Enrollments WHERE student_id = S.student_id) 
+    = 
+    (SELECT COUNT(course_id) FROM Courses)
+
+```
+![{FAE9EBF8-E79F-48A8-812A-7EF833B89AE6}](https://github.com/user-attachments/assets/aa0426d7-277f-4f73-9ad2-64e4cc64cf94)
+
+
+6. Retrieve the names of teachers who have not been assigned to any courses. Use subqueries to 
+find teachers with no course assignments. 
+
+```sql
+
+SELECT 
+    first_name, 
+    last_name
+FROM 
+    Teacher
+WHERE 
+    teacher_id NOT IN (SELECT DISTINCT teacher_id FROM Courses WHERE teacher_id IS NOT NULL)
+
+```
+
+
+7. Calculate the average age of all students. Use subqueries to calculate the age of each student 
+based on their date of birth. 
+
+```sql
+
+
+```
+
+
+8. Identify courses with no enrollments. Use subqueries to find courses without enrollment 
+records. 
+
+```sql
+
+
+```
+
+
+9. Calculate the total payments made by each student for each course they are enrolled in. Use 
+subqueries and aggregate functions to sum payments. 
+
+```sql
+
+
+```
+
+
+10. Identify students who have made more than one payment. Use subqueries and aggregate 
+functions to count payments per student and filter for those with counts greater than one. 
+
+```sql
+
+
+```
+
+
+11. Write an SQL query to calculate the total payments made by each student. Join the "Students" 
+table with the "Payments" table and use GROUP BY to calculate the sum of payments for each 
+student. 
+
+```sql
+
+
+```
+
+
+12. Retrieve a list of course names along with the count of students enrolled in each course. Use 
+JOIN operations between the "Courses" table and the "Enrollments" table and GROUP BY to 
+count enrollments. 
+
+```sql
+
+
+```
+
+
+13. Calculate the average payment amount made by students. Use JOIN operations between the 
+"Students" table and the "Payments" table and GROUP BY to calculate the average.
+
+```sql
+
+
+```
+
 
