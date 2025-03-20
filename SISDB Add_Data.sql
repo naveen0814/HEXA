@@ -1,4 +1,30 @@
 
+INSERT INTO Teacher (first_name, last_name, email)
+VALUES 
+('Ramesh', 'Krishnan', 'ramesh.krishnan@example.com'),
+('Meena', 'Das', 'meena.das@example.com'),
+('Vikram', 'Singh', 'vikram.singh@example.com'),
+('Deepa', 'Shah', 'deepa.shah@example.com'),
+('Arjun', 'Mishra', 'arjun.mishra@example.com'),
+('Lakshmi', 'Nair', 'lakshmi.nair@example.com'),
+('Amit', 'Verma', 'amit.verma@example.com'),
+('Kiran', 'Chowdhury', 'kiran.chowdhury@example.com'),
+('Pooja', 'Saxena', 'pooja.saxena@example.com'),
+('Sanjay', 'Gupta', 'sanjay.gupta@example.com');
+
+INSERT INTO Courses (course_name, credits, teacher_id)
+VALUES 
+('C Programming Basics', 4, 1),
+('Mathematics 101', 3, 2),
+('Java Fundamentals', 4, 3),
+('Advanced Database Management', 4, 4),
+('Operating Systems Concepts', 3, 5),
+('Data Structures', 4, 6),
+('Cloud Computing', 3, 7),
+('Web Development', 4, 8),
+('Machine Learning', 3, 9),
+('Cyber Security', 4, 10);
+
 INSERT INTO Students (first_name, last_name, date_of_birth, email, phone_number)
 VALUES 
 ('Naveen', 'Kumar', '1995-08-15', 'naveen.kumar@example.com', '9876543210'),
@@ -12,32 +38,18 @@ VALUES
 ('Anjali', 'Sharma', '1997-01-30', 'anjali.sharma@example.com', '9876589012'),
 ('Priya', 'Iyer', '1998-05-14', 'priya.iyer@example.com', '9876590123');
 
-INSERT INTO Teacher (first_name, last_name, email)
-VALUES 
-('Ramesh', 'Krishnan', 'ramesh.krishnan@example.com'),
-('Meena', 'Das', 'meena.das@example.com'),
-('Vikram', 'Singh', 'vikram.singh@example.com');
-
-INSERT INTO Courses (course_name, credits, teacher_id)
-VALUES 
-('C Programming Basics', 4, 1),
-('Mathematics 101', 3, 2),
-('Java Fundamentals', 4, 3),
-('Advanced Database Management', 4, 1),
-('Operating Systems Concepts', 3, 2);
-
 INSERT INTO Enrollments (student_id, course_id, enrollment_date)
 VALUES 
 (1, 1, '2024-01-10'),
 (1, 2, '2024-01-12'),
 (2, 3, '2024-01-15'),
-(3, 1, '2024-01-18'),
-(4, 4, '2024-01-20'),
-(5, 5, '2024-01-22'),
-(6, 2, '2024-01-25'),
-(7, 3, '2024-01-28'),
-(8, 1, '2024-01-30'),
-(9, 4, '2024-02-01');
+(3, 4, '2024-01-18'),
+(4, 5, '2024-01-20'),
+(5, 6, '2024-01-22'),
+(6, 7, '2024-01-25'),
+(7, 8, '2024-01-28'),
+(8, 9, '2024-01-30'),
+(9, 10, '2024-02-01');
 
 INSERT INTO Payments (student_id, amount, payment_date)
 VALUES 
@@ -50,4 +62,4 @@ VALUES
 (7, 550.00, '2024-02-16'),
 (8, 500.00, '2024-02-17'),
 (9, 300.00, '2024-02-18'),
-(10, 700.00, '2024-02-19');
+(10, 700.00, '2024-02-19')
